@@ -1,0 +1,29 @@
+---
+- name: Generate / Renew SSL certificates
+  hosts: aws
+  become: yes
+  tasks:
+    - name: Copy the shell script to the remote server
+      copy:
+        src: ./cert_generator.sh
+        dest: /tmp/cert_generator.sh
+        mode: '0755'
+    
+    - name: Execute the shell script on the remote server
+      shell: /tmp/cert_generator.sh
+      args:
+        executable: /bin/bash
+      environment:
+        EMAIL_ADDRESS: "{{ mail_address }}"
+        DOMAIN: "{{ domain }}"
+      register: script_output
+      failed_when: "script_output.rc != 0"
+
+    - name: Debug output
+      debug:
+        msg: "{{ script_output.stdout }}"
+
+    - name: fetch files
+      fetch:
+        src: /tmp/certs.tar.gz
+        dest: build
