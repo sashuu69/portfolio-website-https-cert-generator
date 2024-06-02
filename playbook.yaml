@@ -13,16 +13,13 @@
       ansible.builtin.shell: /tmp/cert_generator.sh
       args:
         executable: /bin/bash
+        creates: "{{ cert_path }}.tar.gz"
       environment:
         EMAIL_ADDRESS: "{{ mail_address }}"
         DOMAIN: "{{ domain }}"
         CERT_PATH: "{{ cert_path }}"
       register: script_output
       failed_when: script_output.rc != 0
-
-    - name: Debug output
-      ansible.builtin.debug:
-        msg: "{{ script_output.stdout }}"
 
     - name: Fetch files
       ansible.builtin.fetch:
