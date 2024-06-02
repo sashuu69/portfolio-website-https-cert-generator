@@ -1,16 +1,16 @@
 ---
 - name: Generate / Renew SSL certificates
   hosts: aws
-  become: yes
+  become: true
   tasks:
     - name: Copy the shell script to the remote server
-      copy:
+      ansible.builtin.copy:
         src: ./cert_generator.sh
         dest: /tmp/cert_generator.sh
-        mode: '0755'
-    
+        mode: "0755"
+
     - name: Execute the shell script on the remote server
-      shell: /tmp/cert_generator.sh
+      ansible.builtin.shell: /tmp/cert_generator.sh
       args:
         executable: /bin/bash
       environment:
@@ -18,13 +18,13 @@
         DOMAIN: "{{ domain }}"
         CERT_PATH: "{{ cert_path }}"
       register: script_output
-      failed_when: "script_output.rc != 0"
+      failed_when: script_output.rc != 0
 
     - name: Debug output
-      debug:
+      ansible.builtin.debug:
         msg: "{{ script_output.stdout }}"
 
-    - name: fetch files
-      fetch:
+    - name: Fetch files
+      ansible.builtin.fetch:
         src: /tmp/certs.tar.gz
         dest: build
