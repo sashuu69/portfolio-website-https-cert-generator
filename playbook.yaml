@@ -16,6 +16,7 @@
       environment:
         EMAIL_ADDRESS: "{{ mail_address }}"
         DOMAIN: "{{ domain }}"
+        CERT_PATH: "{{ cert_path }}"
       register: script_output
       failed_when: "script_output.rc != 0"
 

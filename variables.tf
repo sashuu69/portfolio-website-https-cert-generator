@@ -103,11 +103,17 @@ variable "cloudflare_zone_id" {
 variable "pw_ssl_updater_domain_name" {
   description = "The Domain name for portfolio website"
   type        = string
-  default = "sashwat.in"
+  default     = "sashwat.in"
 }
 
 variable "mail_address" {
   description = "The mail address to generate SSL certificate"
-  type = string
-  default = "sashwat0001@gmail.com"
+  type        = string
+  default     = "sashwat0001@gmail.com"
+}
+
+variable "cert_path" {
+  description = "The path where the SSL certificates needs to be  generated "
+  type        = string
+  default     = "/tmp/certs"
 }
