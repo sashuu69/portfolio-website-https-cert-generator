@@ -21,7 +21,7 @@ The terraform brings up VPC, subnet, gateway, route table, security group, float
     cp my-settings.auto.tfvars-template my-settings.auto.tfvars
     ```
 3. Update `my-settings.auto.tfvars` to appropriate values.
-4. Run `apply_wait_destroy.sh` to generate the certificates.
+4. Run `apply_destroy.sh` to generate the certificates.
 
 ## Contributors
 
