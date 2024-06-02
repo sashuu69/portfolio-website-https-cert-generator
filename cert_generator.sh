@@ -39,7 +39,7 @@ curl -L -o ${INSTALLER_PATH} ${INSTALLER_URL} --no-progress-meter
 tar xzf ${INSTALLER_PATH} -C /tmp
 
 echo "[INFO] Generating certificates..."
-/tmp/lego --tls --email="${EMAIL_ADDRESS}" --domains="${DOMAIN}" --domains="www.${DOMAIN}" --path="${CERT_PATH}" --accept-tos run
+/tmp/lego --tls --email="${EMAIL_ADDRESS}" --domains="${DOMAIN}" --domains="www.${DOMAIN}" --path="${CERT_PATH}" --accept-tos --renew-within 90d run
 
 echo "[INFO] Compressing generated certificates..."
 tar -czf "${CERT_PATH}.tar.gz" ${CERT_PATH}
