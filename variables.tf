@@ -118,13 +118,13 @@ variable "cert_path" {
   default     = "/tmp/certs"
 }
 
-variable "expiry_dates" {
+variable "expiry_days" {
   description = "SSL certificate expiry days"
-  type = number
-  default = 90
+  type        = number
+  default     = 90
 
   validation {
-    condition = var.expiry_dates <= 0 && var.expiry_dates > 90
+    condition     = var.expiry_days <= 0 && var.expiry_days > 90
     error_message = "The expiry days must be between 1 and 90"
   }
 }

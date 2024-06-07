@@ -176,7 +176,7 @@ resource "null_resource" "pw_ssl_updater_ansible_playbook" {
     command = <<EOT
     sleep 20
     ansible-playbook -i ${var.inventory_path} playbook.yaml \
-      --extra-vars "mail_address=${var.mail_address} domain=${var.pw_ssl_updater_domain_name} cert_path=${var.cert_path} expiry_days=${var.expiry_dates}d"
+      --extra-vars "mail_address=${var.mail_address} domain=${var.pw_ssl_updater_domain_name} cert_path=${var.cert_path} expiry_days=${var.expiry_days}d"
     EOT
   }
 

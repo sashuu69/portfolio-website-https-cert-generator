@@ -25,3 +25,5 @@ cloudflare_zone_id=""
 pw_ssl_updater_domain_name=""
 
 mail_address=""
+cert_path=""
+expiry_days=""
