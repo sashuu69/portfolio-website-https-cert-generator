@@ -44,3 +44,5 @@ portfolio_env
 
 # Env
 env
+
+.DS_Store

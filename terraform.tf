@@ -162,7 +162,7 @@ resource "cloudflare_record" "pw_ssl_updater_dns_records" {
 resource "local_file" "pw_ssl_updater_inventory_file" {
   content  = <<EOF
 [aws]
-${aws_eip_association.pw_ssl_updater_eip_association.public_ip} ansible_user=${var.instance_username} ansible_ssh_private_key_file=${local.private_key_path} ansible_ssh_common_args='-o StrictHostKeyChecking=no'
+${aws_eip_association.pw_ssl_updater_eip_association.public_ip} ansible_user=${var.instance_username} ansible_ssh_private_key_file=${local.private_key_path} ansible_ssh_common_args='-o StrictHostKeyChecking=no' mail_address=${var.mail_address} domain=${var.pw_ssl_updater_domain_name} cert_path=${var.cert_path}
   EOF
   filename = var.inventory_path
 }
@@ -175,8 +175,7 @@ resource "null_resource" "pw_ssl_updater_ansible_playbook" {
   provisioner "local-exec" {
     command = <<EOT
     sleep 20
-    ansible-playbook -i ${var.inventory_path} playbook.yaml \
-      --extra-vars "mail_address=${var.mail_address} domain=${var.pw_ssl_updater_domain_name} cert_path=${var.cert_path}"
+    ansible-playbook -i ${var.inventory_path} playbook.yaml
     EOT
   }
 
