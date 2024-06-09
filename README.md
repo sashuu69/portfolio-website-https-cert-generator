@@ -20,7 +20,7 @@ The terraform brings up VPC, subnet, gateway, route table, security group, float
     ```bash
     cp env.template env
     ```
-3. Update `my-settings.auto.tfvars` to appropriate values. The following is an example.
+3. Update `env` to appropriate values. The following is an example.
 
     ```bash
     sashuu69@Sashwats-MacBook-Pro portfolio-website-https-cert-generator % cat env
@@ -46,8 +46,12 @@ The terraform brings up VPC, subnet, gateway, route table, security group, float
     export PW_SSL_CERT_PATH="/tmp/certs"
     sashuu69@Sashwats-MacBook-Pro portfolio-website-https-cert-generator %
     ```
-4. Run `run.sh` to generate the certificates. The certs will be available as tar under  `build/<ip-address>/tmp`.
-5. Untar the tar file under the above mentioned path. The certificates include `<domain>.crt`, `<domain>.issuer.crt`, `<domain>.json` and `<domain>.key`.
+4. Source the newly created `env` file.
+    ```bash
+    source env
+    ```
+5. Run `run.sh` to generate the certificates. The certs will be available as tar under  `build/<ip-address>/tmp`.
+6. Untar the tar file under the above mentioned path. The certificates include `<domain>.crt`, `<domain>.issuer.crt`, `<domain>.json` and `<domain>.key`.
 
 ## Contributors
 
