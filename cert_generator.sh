@@ -3,7 +3,8 @@
 : "${EMAIL_ADDRESS? not set}"
 : "${DOMAIN? not set}"
 : "${CERT_PATH? not set}"
-: "${EXPIRY_DAYS? not set}"
+
+set -e
 
 OS=$(uname -s | tr '[:upper:]' '[:lower:]')
 ARCH=$(uname -m)
@@ -40,7 +41,10 @@ curl -L -o ${INSTALLER_PATH} ${INSTALLER_URL} --no-progress-meter
 tar xzf ${INSTALLER_PATH} -C /tmp
 
 echo "[INFO] Generating certificates..."
-/tmp/lego --tls --email="${EMAIL_ADDRESS}" --domains="${DOMAIN}" --domains="www.${DOMAIN}" --path="${CERT_PATH}" --accept-tos --renew-within ${EXPIRY_DAYS} run
+/tmp/lego --tls --email="${EMAIL_ADDRESS}" --domains="${DOMAIN}" --domains="www.${DOMAIN}" --path="${CERT_PATH}" --accept-tos run
+
+echo "[INFO] Generated Certificates"
+ls -lR ${CERT_PATH}
 
 echo "[INFO] Compressing generated certificates..."
 tar -czf "${CERT_PATH}.tar.gz" ${CERT_PATH}

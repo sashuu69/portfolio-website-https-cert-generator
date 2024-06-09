@@ -18,9 +18,12 @@
         EMAIL_ADDRESS: "{{ mail_address }}"
         DOMAIN: "{{ domain }}"
         CERT_PATH: "{{ cert_path }}"
-        EXPIRY_DAYS: "{{ expiry_days }}"
       register: script_output
       failed_when: script_output.rc != 0
+
+    - name: Show script output
+      ansible.builtin.debug:
+        msg: "{{ script_output.stdout }}"
 
     - name: Fetch files
       ansible.builtin.fetch:

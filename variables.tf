@@ -55,18 +55,18 @@ variable "route_table_cidr_block" {
 variable "public_key_path" {
   description = "Public key to add to instance for SSH"
   type        = string
-  default     = "~/.ssh/id_rsa.pub"
+  default     = "build/ssh/id_rsa.pub"
 }
 
 variable "ingress_ports" {
   description = "list of ingress ports for security group"
-  type        = list(any)
+  type        = list(number)
   default     = [22, 80, 443]
 }
 
 variable "egress_ports" {
   description = "list of egress ports for security group"
-  type        = list(any)
+  type        = list(number)
   default     = [0]
 }
 
@@ -103,28 +103,15 @@ variable "cloudflare_zone_id" {
 variable "pw_ssl_updater_domain_name" {
   description = "The Domain name for portfolio website"
   type        = string
-  default     = "sashwat.in"
 }
 
 variable "mail_address" {
   description = "The mail address to generate SSL certificate"
   type        = string
-  default     = "sashwat0001@gmail.com"
 }
 
 variable "cert_path" {
   description = "The path where the SSL certificates needs to be  generated "
   type        = string
   default     = "/tmp/certs"
-}
-
-variable "expiry_days" {
-  description = "SSL certificate expiry days"
-  type        = number
-  default     = 90
-
-  validation {
-    condition     = var.expiry_days <= 0 && var.expiry_days > 90
-    error_message = "The expiry days must be between 1 and 90"
-  }
 }
